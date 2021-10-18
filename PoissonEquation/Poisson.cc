@@ -161,7 +161,7 @@ double* Poisson::FinDiff(double* A, double* resid,int* iteration, int* iter)
 		A[0] = ( A[1] + (Vgs*dx*Cox/eps_s) )/(1 + (dx*Cox/eps_s));
 	//	A[1] = ( A[0] + (dx*eps_ox/eps_s)*Vgs )/(1 + (dx*eps_ox/eps_s));
 
-		std::cout<<"A["<<i<<"] = "<<A[i]<<"\t"<<"mat["<<i<<"] = "<<mat[i]<<std::endl;
+//		std::cout<<"A["<<i<<"] = "<<A[i]<<"\t"<<"mat["<<i<<"] = "<<mat[i]<<std::endl;
 
 		}
 
