@@ -152,16 +152,16 @@ double* Poisson::FinDiff(double* A, double* resid,int* iteration, int* iter)
 
 		for(int i=1; i<nx-1; i++)
 		{
-
+// implicit scheme
+			
 		A[i] = (mat[i+1] + mat[i-1] + (pow(dx,2)*q*Na/eps_s)*(  exp(-mat[i+1]/vt) -1 \
 				-exp(-2*phif/vt)*( exp(mat[i+1]/vt) - 1 ) ) )/2 ;
-
+// Boundary condition
+			
 		A[nx-1]=0;
-	//	A[1]=A[0] + (dx*eps_ox/eps_s)*( Vgs - A[0]  );
+	
 		A[0] = ( A[1] + (Vgs*dx*Cox/eps_s) )/(1 + (dx*Cox/eps_s));
-	//	A[1] = ( A[0] + (dx*eps_ox/eps_s)*Vgs )/(1 + (dx*eps_ox/eps_s));
-
-//		std::cout<<"A["<<i<<"] = "<<A[i]<<"\t"<<"mat["<<i<<"] = "<<mat[i]<<std::endl;
+	
 
 		}
 
