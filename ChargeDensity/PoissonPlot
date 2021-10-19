@@ -1,0 +1,25 @@
+import pandas as pd, matplotlib.pyplot as plt, glob
+
+f=glob.glob("*.dat")
+
+df=pd.read_csv(f[3], sep="\s+")
+dfr=pd.read_csv(f[2], sep="\s+")
+
+x,p=df.iloc[:,0], df.iloc[:,1]
+i,r=dfr.iloc[:,0], dfr.iloc[:,1]
+
+Inp=input("Enter s for solution plot \n or \n r for residual plot \n")
+
+if(Inp=='s'):
+	plt.plot(x,p, label=r"$\Psi (x)$")
+	plt.xlabel("distance (cm)", fontsize=18)
+	plt.ylabel(r"$\Psi (x)$ (eV)", fontsize=18)
+	plt.legend()
+	plt.show()
+
+if(Inp=='r'):
+	plt.plot(i,r, label="Residual")
+	plt.xlabel("Iterations (n)", fontsize=18)
+	plt.ylabel("Residual", fontsize=18)
+	plt.legend()
+	plt.show()
