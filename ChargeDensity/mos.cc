@@ -3,8 +3,8 @@
 
 int main(int argc, char* argv[])
 {
-int iter, maxiter=2000000, ng=50, nx=atoi(argv[1]);
-double init=1.0, tsi=200e-7, tox=2e-7, Na=1e+17, Vgm=1.5, tol=atof(argv[2]);
+int iter, maxiter=200000000, ng=50, nx=atoi(argv[1]);
+double init=1.0, tsi=200e-7, tox=2e-7, Na=1e+17, Vgm=4, tol=atof(argv[2]);
 Poisson pos(tsi=tsi, tox=tox, Na=Na, tol=tol, maxiter=maxiter, nx=nx );
 Charge qinv(tsi=tsi, tox=tox, Na=Na, tol=tol, maxiter=maxiter, nx=nx );
 
@@ -41,7 +41,7 @@ for(int i=0; i<ng-1; i++)
 	
 A=pos.Init(A,init);
 A=pos.FinDiff(A,R,Itr,&iter,Vgs[i]);
-Qin[i]=qinv.Trapz(A,nx,delx);
+Qin[i]=qinv.Simpson(A,nx,delx);
 
 }
 

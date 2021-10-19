@@ -27,6 +27,45 @@ return qi;
 
 }
 
+double Charge::Simpson(double* A, int n,double delx)
+{
+double s=0,h=delx;
+double* Nin=N_inv(A,n);
+for(int i=0; i<n; i++)
+{
+if(i==0)
+{
+
+s+=(3*h/8)*Nin[i];
+}
+else if(i==n-1)
+{
+
+s+=(3*h/8)*Nin[i];
+
+}
+else
+{
+if(i%3 !=0)
+{
+s+= (9*h/8)*Nin[i];
+
+}
+else
+{
+
+s+= (6*h/8)*Nin[i];
+
+}
+
+}
+
+}
+
+return s;
+}
+
+/*
 
 double Charge::Trapz(double* A, int n,double delx)
 {
@@ -57,6 +96,8 @@ s+=h*Nin[i];
 
 return s;
 }
+
+*/
 
 void Charge::WriteCharge(double* Ninv,double* X,double* Qin, double* Vgs,std::string strn,std::string strq, int ng)
 {

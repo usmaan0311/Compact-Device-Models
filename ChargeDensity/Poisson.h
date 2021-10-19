@@ -41,7 +41,7 @@ class Charge : public Poisson
 	public:
 		Charge(double,double,double,double,int,int);
 		double* N_inv(double*, int);
-		double Trapz(double*,int, double);
+		double Simpson(double*,int, double);
 		void WriteCharge(double*,double*,double*,double*,std::string,std::string,int);
 
 
