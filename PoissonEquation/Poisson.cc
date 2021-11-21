@@ -6,13 +6,14 @@
 #include"Poisson.h"
 
 
-Poisson::Poisson(double tsi, double tox,double Na, double Vgs, double tol,int maxiter, int nx)
+Poisson::Poisson(double phi_ms, double tsi, double tox,double Na, double Vgs, double tol,int maxiter, int nx)
 {
 
 this->tsi=tsi;
 this->tox=tox;
 this->Na=Na;
 this->Vgs=Vgs;
+this->phi_ms=phi_ms;
 Cox=eps_ox/this->tox;
 phif=vt*log(this->Na/ni);
 tdep=sqrt(2*eps_s*phif/(q*this->Na));
@@ -134,7 +135,6 @@ return norm;
 
 double* Poisson::FinDiff(double* A, double* resid,int* iteration, int* iter)
 {
-
 	double* mat=new double [nx];
 	*iter=0;
 	double diff=1.0 + tol;
@@ -160,7 +160,7 @@ double* Poisson::FinDiff(double* A, double* resid,int* iteration, int* iter)
 			
 		A[nx-1]=0;
 	
-		A[0] = ( A[1] + (Vgs*dx*Cox/eps_s) )/(1 + (dx*Cox/eps_s));
+		A[0] = ( A[1] + ((Vgs - phi_ms)*dx*Cox/eps_s) )/(1 + (dx*Cox/eps_s));
 	
 
 		}
@@ -208,5 +208,4 @@ void Poisson::WriteSol(double* A, double* X,double* R, int* Itr,  std::string st
 
 
 }
-
 

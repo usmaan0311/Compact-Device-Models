@@ -1,4 +1,4 @@
-import pandas as pd, matplotlib.pyplot as plt, glob
+import pandas as pd, matplotlib.pyplot as plt, glob, numpy as np
 
 f=glob.glob("*.dat")
 
@@ -7,13 +7,32 @@ dfr=pd.read_csv(f[0], sep="\s+")
 
 x,p=df.iloc[:,0], df.iloc[:,1]
 i,r=dfr.iloc[:,0], dfr.iloc[:,1]
+Eg=1.2
 
-Inp=input("Enter s for solution plot \n or \n r for residual plot \n")
+phif=0.417459
+
+Ec=-p
+Ev=-p-Eg
+Ei=(Ec+Ev)/2
+Ei=np.asarray(Ei)
+Ef=(Ei[-1] - phif)*np.ones(len(Ei))
+
+Inp=input("Enter s for solution plot of psi\n or e for energy band diagram\n or \n r for residual plot \n")
 
 if(Inp=='s'):
 	plt.plot(x,p, label=r"$\Psi (x)$")
 	plt.xlabel("distance (cm)", fontsize=18)
 	plt.ylabel(r"$\Psi (x)$ (eV)", fontsize=18)
+	plt.legend()
+	plt.show()
+
+if(Inp=='e'):
+	plt.plot(x,Ec, label="Ec")
+	plt.plot(x,Ev, label="Ev")
+	plt.plot(x,Ei,'--', label="Ei")
+	plt.plot(x,Ef,'--', label="Ef")
+	plt.xlabel("distance (cm)", fontsize=18)
+	plt.ylabel("Ec-Ev (eV)", fontsize=18)
 	plt.legend()
 	plt.show()
 
@@ -23,3 +42,5 @@ if(Inp=='r'):
 	plt.ylabel("Residual", fontsize=18)
 	plt.legend()
 	plt.show()
+
+

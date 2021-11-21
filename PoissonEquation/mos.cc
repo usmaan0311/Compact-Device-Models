@@ -4,8 +4,8 @@
 int main(int argc, char* argv[])
 {
 int iter, maxiter=2000000, nx=atoi(argv[1]);
-double init=1.0, tsi=200e-7, tox=2e-7, Na=1e+17, Vgs=1.5, tol=atof(argv[2]);
-Poisson pos(tsi=tsi, tox=tox, Na=Na, Vgs=Vgs, tol=tol, maxiter=maxiter, nx=nx );
+double init=1.0, tsi=200e-7, tox=2e-7, Na=1e+17, phi_ms=0.23, Vgs=1.25 , tol=atof(argv[2]);
+Poisson pos(phi_ms=phi_ms, tsi=tsi, tox=tox, Na=Na, Vgs=Vgs, tol=tol, maxiter=maxiter, nx=nx );
 
 double* X=new double [nx];
 double* A=new double [nx];
@@ -22,7 +22,8 @@ A=pos.FinDiff(A,R,Itr,&iter);
 std::cout<<"converged in Iterations:\t"<<iter<<std::endl;
 
 pos.WriteSol(A,X,R,Itr,"solution.dat","Residual.dat");
-
+std::cout<<"Psi_s =\t"<<A[0]-A[nx-1]<<std::endl;
+std::cout<<"Psi_s - 2phif =\t"<<A[0]-A[nx-1] - 2*pos.phif<<std::endl;
 delete [] X;
 delete [] A;
 delete [] R;

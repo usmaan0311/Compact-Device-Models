@@ -14,7 +14,8 @@ double Na;
 double tox;
 double tsi;
 double Cox;
-double phif;
+double phi_ms;
+//double phif;
 double Vgs;
 double tdep;
 double tol;
@@ -23,7 +24,8 @@ int maxiter;
 int nx;
 
 	public:
-		Poisson(double,double,double,double, double, int, int);
+		double phif;
+		Poisson(double,double,double,double,double, double, int, int);
 		void PrintVal();
 		double* XVec(double*);
 		double* RVec(double*);
